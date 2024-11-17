@@ -7,9 +7,12 @@ function App() {
   const [books, setBooks] = useState([]);
 
   const fetchBooks = async () => {
+    // retrieves books from db.json
     const response = await axios.get("http://localhost:3001/books");
+    // console.log(response);
     setBooks(response.data);
   };
+  // fetchBooks function only runs at initial render
   useEffect(() => {
     fetchBooks();
   }, []);
@@ -18,7 +21,8 @@ function App() {
     const response = await axios.put(`http://localhost:3001/books/${id}`, {
       title: newTitle,
     });
-    console.log(...Object.values(response.data));
+    // console.log(...Object.values(response.data));
+    console.log(response);
     const updatedBooks = books.map((book) => {
       if (book.id === id) {
         return { ...book, ...response.data };
